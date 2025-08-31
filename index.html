@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sujan Subedi - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #000000 0%, #4c1d95 50%, #7c3aed 100%);
+            position: relative;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .gradient-bg::after {
+            content: '{ } < /> function() { return code; } class Developer { } const skills = []; if (passionate) { create(); } while (learning) { grow(); } </>';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: rgba(124, 58, 237, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 2;
+            padding: 20px;
+            pointer-events: none;
+            overflow: hidden;
+            animation: codeFlow 20s linear infinite;
+        }
+        
+        @keyframes codeFlow {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+
+        
+        .floating-btn {
+            position: fixed;
+            z-index: 1000;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .whatsapp-btn {
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+        }
+        
+        .phone-btn {
+            bottom: 90px;
+            right: 20px;
+            background: #007bff;
+        }
+        
+        .skill-item {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #a855f7;
+            transform: translateY(-2px);
+        }
+
+        /* Image preview styling */
+        .image-preview {
+            width: 100%;
+            height: 150px;
+            border: 2px dashed #7c3aed;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background-color: #1f2937;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #7c3aed;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            margin-top: 8px;
+        }
+        
+        .upload-btn:hover {
+            background-color: #6d28d9;
+        }
+        
+        #image-upload, #edit-image-upload {
+            display: none;
+        }
+        
+        /* Edit modal styling */
+        .edit-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .edit-modal-content {
+            background-color: #1f2937;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid #7c3aed;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b border-purple-500/30">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg flex items-center justify-center font-bold text-xl">
+                        SS
+                    </div>
+                    <span class="text-xl font-bold">Sujan Subedi</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 border-t border-purple-500/30">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block nav-link">Home</a>
+                <a href="#about" class="block nav-link">About</a>
+                <a href="#skills" class="block nav-link">Skills</a>
+                <a href="#projects" class="block nav-link">Projects</a>
+                <a href="#reviews" class="block nav-link">Reviews</a>
+                <a href="#contact" class="block nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
+                    <h1 class="text-5xl lg:text-7xl font-bold mb-6">
+                        Hi, I'm <span class="text-purple-400">Sujan</span>
+                    </h1>
+                    <p class="text-xl lg:text-2xl mb-8 text-gray-300">
+                        Passionate, Selfless & Dynamic Person
+                    </p>
+                    <p class="text-lg mb-8 text-gray-400">
+                        Transforming ideas into digital reality with creativity and innovation
+                    </p>
+                    <button onclick="scrollToSection('contact')" class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                        Get In Touch
+                    </button>
+                </div>
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="sujan.jpg" alt="Sujan Subedi" class="w-64 h-64 rounded-lg object-cover border-4 border-purple-500 shadow-2xl" onerror="this.src=''; this.alt='Photo not available'; this.className='w-64 h-64 rounded-lg bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white text-6xl font-bold border-4 border-purple-500 shadow-2xl'; this.innerHTML='SS';">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900 relative">
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <div class="absolute top-10 left-10 text-purple-400 font-mono text-sm">const developer = { name: 'Sujan', skills: ['frontend', 'backend'] };</div>
+            <div class="absolute top-32 right-20 text-purple-400 font-mono text-sm">function createAmazingWebsites() { return innovation + passion; }</div>
+            <div class="absolute bottom-20 left-1/4 text-purple-400 font-mono text-sm">class WebDeveloper extends Passionate { constructor() { super(); } }</div>
+        </div>
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">About <span class="text-purple-400">Me</span></h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-purple-300">Passionate, Selfless & Dynamic Developer</h3>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        I am Sujan Subedi, a passionate web developer with expertise in both frontend and backend development. 
+                        My journey in technology is driven by a selfless commitment to creating solutions that make a difference 
+                        and a dynamic approach to learning and adapting to new technologies.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-black/50 p-6 rounded-lg border border-purple-500/30">
+                        <h4 class="text-xl font-semibold mb-4 text-purple-300">
+                            <i class="fas fa-code mr-2"></i>Development Expertise
+                        </h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• Frontend Developer (React, JavaScript)</li>
+                            <li>• Backend Developer (Node.js, Python)</li>
+                            <li>• Full-Stack Web Development</li>
+                            <li>• Database Design & Management</li>
+                        </ul>
+                    </div>
+                    <div class="bg-black/50 p-6 rounded-lg border border-purple-500/30">
+                        <h4 class="text-xl font-semibold mb-4 text-purple-300">
+                            <i class="fas fa-palette mr-2"></i>Design & More
+                        </h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• Web Designer (UI/UX)</li>
+                            <li>• Graphic Designer</li>
+                            <li>• Computer Hardware & Networking</li>
+                            <li>• Business Solutions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">My <span class="text-purple-400">Skills</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Language Skills -->
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('languages')">
+                    <i class="fas fa-language text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Languages</h3>
+                    <p class="text-sm text-gray-400">English, Nepali, Hindi</p>
+                </div>
+                
+                <!-- Programming Languages -->
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('python')">
+                    <i class="fab fa-python text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Python</h3>
+                    <p class="text-sm text-gray-400">Advanced</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('javascript')">
+                    <i class="fab fa-js-square text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">JavaScript</h3>
+                    <p class="text-sm text-gray-400">Expert</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('react')">
+                    <i class="fab fa-react text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">React</h3>
+                    <p class="text-sm text-gray-400">Advanced</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('nodejs')">
+                    <i class="fab fa-node-js text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Node.js</h3>
+                    <p class="text-sm text-gray-400">Advanced</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('cpp')">
+                    <i class="fas fa-code text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">C/C++</h3>
+                    <p class="text-sm text-gray-400">Intermediate</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('dsa')">
+                    <i class="fas fa-project-diagram text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">DSA</h3>
+                    <p class="text-sm text-gray-400">Intermediate</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('flask')">
+                    <i class="fas fa-flask text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Flask</h3>
+                    <p class="text-sm text-gray-400">Advanced</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('django')">
+                    <i class="fab fa-python text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Django</h3>
+                    <p class="text-sm text-gray-400">Advanced</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('fastapi')">
+                    <i class="fas fa-rocket text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">FastAPI</h3>
+                    <p class="text-sm text-gray-400">Intermediate</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('wordpress')">
+                    <i class="fab fa-wordpress text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">WordPress</h3>
+                    <p class="text-sm text-gray-400">Advanced</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('github')">
+                    <i class="fab fa-github text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">GitHub</h3>
+                    <p class="text-sm text-gray-400">Expert</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('design')">
+                    <i class="fas fa-paint-brush text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Graphic Design</h3>
+                    <p class="text-sm text-gray-400">Photoshop/Canva</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('uiux')">
+                    <i class="fas fa-desktop text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">UI/UX Design</h3>
+                    <p class="text-sm text-gray-400">Web Designer</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('hardware')">
+                    <i class="fas fa-microchip text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Hardware</h3>
+                    <p class="text-sm text-gray-400">Computer & Networking</p>
+                </div>
+                
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('tally')">
+                    <i class="fas fa-calculator text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Tally</h3>
+                    <p class="text-sm text-gray-400">Accounting Software</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center mb-16">
+                <h2 class="text-4xl font-bold">My <span class="text-purple-400">Projects</span></h2>
+                <button onclick="showAdminLogin()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm">
+                    <i class="fas fa-cog mr-2"></i>Admin
+                </button>
+            </div>
+            
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projects will be loaded here -->
+            </div>
+            
+            <!-- Admin Panel -->
+            <div id="admin-panel" class="hidden mt-12 bg-black/50 p-6 rounded-lg border border-purple-500/30">
+                <h3 class="text-xl font-semibold mb-4">Admin Panel</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-2">Add New Project</h4>
+                        <input type="text" id="new-project-name" placeholder="Project Name" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white">
+                        <textarea id="new-project-desc" placeholder="Project Description" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white h-20"></textarea>
+                        
+                        <!-- Image Upload Section -->
+                        <div class="mb-2">
+                            <label class="block text-sm font-semibold mb-2">Project Image</label>
+                            <div id="image-preview" class="image-preview">
+                                <span class="text-gray-400">Image preview</span>
+                            </div>
+                            <input type="file" id="image-upload" accept="image/*" capture="camera">
+                            <label for="image-upload" class="upload-btn">
+                                <i class="fas fa-upload mr-2"></i>Upload Image
+                            </label>
+                        </div>
+                        
+                        <button onclick="addProject()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Add Project</button>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-2">Manage Projects</h4>
+                        <div id="admin-projects-list" class="space-y-2">
+                            <!-- Admin project list will be here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edit Project Modal (hidden by default) -->
+    <div id="edit-modal" class="edit-modal hidden">
+        <div class="edit-modal-content">
+            <h3 class="text-xl font-semibold mb-4">Edit Project</h3>
+            <input type="hidden" id="edit-project-id">
+            
+            <input type="text" id="edit-project-name" placeholder="Project Name" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white">
+            <textarea id="edit-project-desc" placeholder="Project Description" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white h-20"></textarea>
+            
+            <!-- Image Upload Section for Editing -->
+            <div class="mb-4">
+                <label class="block text-sm font-semibold mb-2">Project Image</label>
+                <div id="edit-image-preview" class="image-preview">
+                    <span class="text-gray-400">Image preview</span>
+                </div>
+                <input type="file" id="edit-image-upload" accept="image/*" capture="camera">
+                <label for="edit-image-upload" class="upload-btn">
+                    <i class="fas fa-upload mr-2"></i>Change Image
+                </label>
+            </div>
+            
+            <div class="flex space-x-2">
+                <button onclick="updateProject()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded flex-1">Update Project</button>
+                <button onclick="closeEditModal()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded flex-1">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Client <span class="text-purple-400">Reviews</span></h2>
+            
+            <!-- Reviews -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
+                    <div class="flex items-center mb-4">
+                        <img src="client1.jpg" alt="Client 1" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='C1'; this.src='';">
+                        <div>
+                            <h4 class="font-semibold">John Smith</h4>
+                            <div class="text-yellow-400">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Sujan delivered an exceptional website for our business. His attention to detail and technical expertise is outstanding!"</p>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
+                    <div class="flex items-center mb-4">
+                        <img src="client2.jpg" alt="Client 2" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='M2'; this.src='';">
+                        <div>
+                            <h4 class="font-semibold">Maria Garcia</h4>
+                            <div class="text-yellow-400">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Professional, reliable, and creative. Sujan transformed our ideas into a beautiful, functional website."</p>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
+                    <div class="flex items-center mb-4">
+                        <img src="client3.jpg" alt="Client 3" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='R3'; this.src='';">
+                        <div>
+                            <h4 class="font-semibold">Robert Johnson</h4>
+                            <div class="text-yellow-400">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Excellent communication and fast delivery. The e-commerce site Sujan built has increased our sales significantly."</p>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
+                    <div class="flex items-center mb-4">
+                        <img src="client4.jpg" alt="Client 4" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='S4'; this.src='';">
+                        <div>
+                            <h4 class="font-semibold">Sarah Wilson</h4>
+                            <div class="text-yellow-400">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Amazing work on our portfolio website. Sujan's design skills and technical knowledge are top-notch."</p>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
+                    <div class="flex items-center mb-4">
+                        <img src="client5.jpg" alt="Client 5" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='D5'; this.src='';">
+                        <div>
+                            <h4 class="font-semibold">David Brown</h4>
+                            <div class="text-yellow-400">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Sujan is a true professional. He delivered our project on time and exceeded our expectations in every way."</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-center mb-8">Frequently Asked <span class="text-purple-400">Questions</span></h3>
+                <div class="space-y-4">
+                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
+                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(1)">
+                            What services do you offer?
+                            <i class="fas fa-chevron-down" id="faq-icon-1"></i>
+                        </button>
+                        <div id="faq-content-1" class="hidden p-4 pt-0 text-gray-300">
+                            I offer full-stack web development, UI/UX design, graphic design, and computer hardware services. This includes custom websites, e-commerce platforms, and business solutions.
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
+                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(2)">
+                            How long does a typical project take?
+                            <i class="fas fa-chevron-down" id="faq-icon-2"></i>
+                        </button>
+                        <div id="faq-content-2" class="hidden p-4 pt-0 text-gray-300">
+                            Project timelines vary based on complexity. A simple website takes 1-2 weeks, while complex e-commerce or custom applications may take 4-8 weeks.
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
+                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(3)">
+                            Do you provide ongoing support?
+                            <i class="fas fa-chevron-down" id="faq-icon-3"></i>
+                        </button>
+                        <div id="faq-content-3" class="hidden p-4 pt-0 text-gray-300">
+                            Yes, I provide ongoing maintenance and support for all projects. This includes updates, bug fixes, and technical assistance as needed.
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
+                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(4)">
+                            What are your payment terms?
+                            <i class="fas fa-chevron-down" id="faq-icon-4"></i>
+                        </button>
+                        <div id="faq-content-4" class="hidden p-4 pt-0 text-gray-300">
+                            I typically work with a 50% upfront payment and 50% upon completion. For larger projects, we can discuss milestone-based payments.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Get In <span class="text-purple-400">Touch</span></h2>
+            <div class="max-w-2xl mx-auto">
+                <form id="contact-form" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Full Name *</label>
+                        <input type="text" id="fullname" required class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Address *</label>
+                        <input type="text" id="address" required class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Phone Number *</label>
+                        <input type="tel" id="phone" required class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Inquiry *</label>
+                        <textarea id="inquiry" required rows="5" class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 py-3 rounded-lg font-semibold transition-all duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-purple-500/30">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center">
+                <div class="flex space-x-6 mb-8">
+                    <a href="https://www.facebook.com/subedi.sujan.2025" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/kalki_sujan123/?igsh=c2w0Y3ZhaGRmdHk4#" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sujan-subedi-9b9260264/" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@sujansubedi989" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://wa.me/+9779804918250" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://github.com/Suj10S/" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fas fa-github"></i>
+                    </a>
+                    <a href="tel:+9779804918250" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="mailto:sujansubedi803@gmail.com" class="text-2xl hover:text-purple-400 transition-colors">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400 text-center">
+                    © 2022 All Rights Reserved. SUJAN SUBEDI <br>
+                    Power By SUJAN SUBEDI
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/+9779804918250" class="floating-btn whatsapp-btn">
+        <i class="fab fa-whatsapp text-white text-xl"></i>
+    </a>
+    
+    <a href="tel:+9779804918250" class="floating-btn phone-btn">
+        <i class="fas fa-phone text-white text-xl"></i>
+    </a>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-gray-900 p-8 rounded-lg border border-purple-500/30 max-w-md w-full mx-4">
+            <h3 class="text-xl font-semibold mb-4">Admin Login</h3>
+            <input type="password" id="admin-password" placeholder="Enter password" class="w-full p-3 mb-4 bg-black border border-purple-500/30 rounded text-white">
+            <div class="flex space-x-4">
+                <button onclick="adminLogin()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded flex-1">Login</button>
+                <button onclick="closeAdminModal()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded flex-1">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Navigation links smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Projects data
+        let projects = [
+            {
+                id: 1,
+                name: "Portfolio Website",
+                description: "A modern, responsive portfolio website showcasing skills and projects with beautiful animations.",
+                link: "#",
+                image: "portfolio.jpg"
+            },
+            {
+                id: 2,
+                name: "E-commerce Website",
+                description: "Full-featured online store with shopping cart, payment integration, and admin panel.",
+                link: "#",
+                image: "ecommerce.jpg"
+            },
+            {
+                id: 3,
+                name: "To-Do List App",
+                description: "Interactive task management application with drag-and-drop functionality and local storage.",
+                link: "#",
+                image: "todolist.jpg"
+            },
+            {
+                id: 4,
+                name: "Business Website",
+                description: "Professional business website with contact forms, service pages, and SEO optimization.",
+                link: "#",
+                image: "business.jpg"
+            }
+        ];
+
+        // Variables to store uploaded images
+        let uploadedImage = null;
+        let editUploadedImage = null;
+
+        // Image upload functionality
+        document.getElementById('image-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    uploadedImage = event.target.result;
+                    document.getElementById('image-preview').innerHTML = `<img src="${uploadedImage}" alt="Preview">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Edit image upload functionality
+        document.getElementById('edit-image-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    editUploadedImage = event.target.result;
+                    document.getElementById('edit-image-preview').innerHTML = `<img src="${editUploadedImage}" alt="Preview">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Load projects
+        function loadProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+            
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card bg-black/50 rounded-lg border border-purple-500/30 cursor-pointer overflow-hidden';
+                projectCard.onclick = () => window.open(project.link, '_blank');
+                projectCard.innerHTML = `
+                    <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 relative overflow-hidden">
+                        ${project.imageData ? 
+                            `<img src="${project.imageData}" alt="${project.name}" class="w-full h-full object-cover">` : 
+                            `<img src="${project.image}" alt="${project.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                             <div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white text-4xl font-bold" style="display: none;">
+                                 <i class="fas fa-code"></i>
+                             </div>`
+                        }
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">${project.name}</h3>
+                        <p class="text-gray-300 mb-4">${project.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-400 font-semibold">View Project →</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(projectCard);
+            });
+        }
+
+        // Admin functionality
+        let isAdminLoggedIn = false;
+
+        function showAdminLogin() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+            document.getElementById('admin-password').value = '';
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('admin-password').value;
+            if (password === 'Sujan@123') {
+                isAdminLoggedIn = true;
+                closeAdminModal();
+                document.getElementById('admin-panel').classList.remove('hidden');
+                loadAdminProjects();
+                alert('Admin login successful!');
+            } else {
+                alert('Incorrect password!');
+            }
+        }
+
+        function loadAdminProjects() {
+            const list = document.getElementById('admin-projects-list');
+            list.innerHTML = '';
+            
+            projects.forEach(project => {
+                const item = document.createElement('div');
+                item.className = 'flex justify-between items-center bg-gray-800 p-2 rounded';
+                item.innerHTML = `
+                    <span>${project.name}</span>
+                    <div class="flex space-x-2">
+                        <button onclick="editProject(${project.id})" class="bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-sm">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deleteProject(${project.id})" class="bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-sm">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function addProject() {
+            if (!isAdminLoggedIn) return;
+            
+            const name = document.getElementById('new-project-name').value;
+            const desc = document.getElementById('new-project-desc').value;
+            
+            if (name && desc) {
+                const newProject = {
+                    id: Date.now(),
+                    name: name,
+                    description: desc,
+                    link: "#",
+                    imageData: uploadedImage || null
+                };
+                projects.push(newProject);
+                loadProjects();
+                loadAdminProjects();
+                
+                // Reset form
+                document.getElementById('new-project-name').value = '';
+                document.getElementById('new-project-desc').value = '';
+                document.getElementById('image-preview').innerHTML = '<span class="text-gray-400">Image preview</span>';
+                uploadedImage = null;
+                
+                alert('Project added successfully!');
+            } else {
+                alert('Please fill in all fields!');
+            }
+        }
+
+        function editProject(id) {
+            if (!isAdminLoggedIn) return;
+            
+            const project = projects.find(p => p.id === id);
+            if (project) {
+                document.getElementById('edit-project-id').value = project.id;
+                document.getElementById('edit-project-name').value = project.name;
+                document.getElementById('edit-project-desc').value = project.description;
+                
+                // Show current image if available
+                if (project.imageData) {
+                    document.getElementById('edit-image-preview').innerHTML = `<img src="${project.imageData}" alt="Preview">`;
+                } else {
+                    document.getElementById('edit-image-preview').innerHTML = '<span class="text-gray-400">Image preview</span>';
+                }
+                
+                // Reset edit uploaded image
+                editUploadedImage = null;
+                
+                // Show modal
+                document.getElementById('edit-modal').classList.remove('hidden');
+            }
+        }
+
+        function updateProject() {
+            if (!isAdminLoggedIn) return;
+            
+            const id = parseInt(document.getElementById('edit-project-id').value);
+            const name = document.getElementById('edit-project-name').value;
+            const desc = document.getElementById('edit-project-desc').value;
+            
+            if (name && desc) {
+                const projectIndex = projects.findIndex(p => p.id === id);
+                if (projectIndex !== -1) {
+                    projects[projectIndex].name = name;
+                    projects[projectIndex].description = desc;
+                    
+                    // Update image if a new one was uploaded
+                    if (editUploadedImage) {
+                        projects[projectIndex].imageData = editUploadedImage;
+                    }
+                    
+                    loadProjects();
+                    loadAdminProjects();
+                    closeEditModal();
+                    alert('Project updated successfully!');
+                }
+            } else {
+                alert('Please fill in all fields!');
+            }
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        }
+
+        function deleteProject(id) {
+            if (!isAdminLoggedIn) return;
+            
+            projects = projects.filter(project => project.id !== id);
+            loadProjects();
+            loadAdminProjects();
+            alert('Project deleted successfully!');
+        }
+
+        // Skill links
+        function openSkillLink(skill) {
+            const links = {
+                'languages': 'https://en.wikipedia.org/wiki/Multilingualism',
+                'python': 'https://python.org',
+                'javascript': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+                'react': 'https://reactjs.org',
+                'nodejs': 'https://nodejs.org',
+                'cpp': 'https://cplusplus.com',
+                'dsa': 'https://en.wikipedia.org/wiki/Data_structure',
+                'flask': 'https://flask.palletsprojects.com',
+                'django': 'https://djangoproject.com',
+                'fastapi': 'https://fastapi.tiangolo.com',
+                'wordpress': 'https://wordpress.org',
+                'github': 'https://github.com',
+                'design': 'https://adobe.com/products/photoshop.html',
+                'uiux': 'https://en.wikipedia.org/wiki/User_interface_design',
+                'hardware': 'https://en.wikipedia.org/wiki/Computer_hardware',
+                'tally': 'https://tallysolutions.com'
+            };
+            
+            if (links[skill]) {
+                window.open(links[skill], '_blank');
+            }
+        }
+
+        // FAQ functionality
+        function toggleFAQ(id) {
+            const content = document.getElementById(`faq-content-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        // Contact form
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullname = document.getElementById('fullname').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const inquiry = document.getElementById('inquiry').value;
+            
+            // This is a demo form - in a real application, you would send this data to a server
+            alert(`Thank you ${fullname}! Your message has been received. We'll get back to you soon.`);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Initialize
+        loadProjects();
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-black');
+                nav.classList.remove('bg-black/90');
+            } else {
+                nav.classList.add('bg-black/90');
+                nav.classList.remove('bg-black');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977da22ca78cd8b9',t:'MTc1NjY1NDkwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

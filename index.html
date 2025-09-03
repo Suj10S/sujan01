@@ -329,6 +329,41 @@
                     <p class="text-sm text-gray-400">English, Nepali, Hindi</p>
                 </div>
                 
+                <!-- HTML Skill -->
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('html')">
+                    <i class="fab fa-html5 text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">HTML</h3>
+                    <p class="text-sm text-gray-400">Markup Language</p>
+                </div>
+
+                <!-- CSS Skill -->
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('css')">
+                    <i class="fab fa-css3-alt text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">CSS</h3>
+                    <p class="text-sm text-gray-400">Styling Language</p>
+                </div>
+
+                <!-- Tailwind CSS Skill -->
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('tailwind')">
+                    <i class="fas fa-wind text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Tailwind CSS</h3>
+                    <p class="text-sm text-gray-400">Utility-First Framework</p>
+                </div>
+
+                <!-- Bootstrap Skill -->
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('bootstrap')">
+                    <i class="fab fa-bootstrap text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">Bootstrap</h3>
+                    <p class="text-sm text-gray-400">CSS Framework</p>
+                </div>
+
+                <!-- AI Prompt Engineering Skill -->
+                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('ai-prompt')">
+                    <i class="fas fa-robot text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="font-semibold mb-2">AI Prompt Engineering</h3>
+                    <p class="text-sm text-gray-400">Optimizing AI Interactions</p>
+                </div>
+                
                 <!-- Programming Languages -->
                 <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('python')">
                     <i class="fab fa-python text-3xl text-purple-400 mb-4"></i>
@@ -986,6 +1021,11 @@
         // Skill links
         function openSkillLink(skill) {
             const links = {
+                'html': 'https://developer.mozilla.org/en-US/docs/Web/HTML',
+                'css': 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+                'tailwind': 'https://tailwindcss.com/docs',
+                'bootstrap': 'https://getbootstrap.com/docs/5.3/getting-started/introduction/',
+                'ai-prompt': 'https://www.promptingguide.ai/',
                 'languages': 'https://en.wikipedia.org/wiki/Multilingualism',
                 'python': 'https://python.org',
                 'javascript': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',

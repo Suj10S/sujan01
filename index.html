@@ -169,6 +169,41 @@
             max-width: 500px;
             border: 1px solid #7c3aed;
         }
+        
+        /* Client avatar styling */
+        .client-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+        
+        .avatar-js {
+            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
+        }
+        
+        .avatar-mg {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        }
+        
+        .avatar-rj {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+        }
+        
+        .avatar-sw {
+            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+        }
+        
+        .avatar-db {
+            background: linear-gradient(135deg, #0ea5e9 0%, #60a5fa 100%);
+        }
     </style>
 </head>
 <body class="bg-black text-white">
@@ -494,7 +529,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                 <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
                     <div class="flex items-center mb-4">
-                        <img src="client1.jpg" alt="Client 1" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='C1'; this.src='';">
+                        <div class="client-avatar avatar-js">JS</div>
                         <div>
                             <h4 class="font-semibold">John Smith</h4>
                             <div class="text-yellow-400">★★★★★</div>
@@ -505,7 +540,7 @@
                 
                 <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
                     <div class="flex items-center mb-4">
-                        <img src="client2.jpg" alt="Client 2" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='M2'; this.src='';">
+                        <div class="client-avatar avatar-mg">MG</div>
                         <div>
                             <h4 class="font-semibold">Maria Garcia</h4>
                             <div class="text-yellow-400">★★★★★</div>
@@ -516,7 +551,7 @@
                 
                 <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
                     <div class="flex items-center mb-4">
-                        <img src="client3.jpg" alt="Client 3" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='R3'; this.src='';">
+                        <div class="client-avatar avatar-rj">RJ</div>
                         <div>
                             <h4 class="font-semibold">Robert Johnson</h4>
                             <div class="text-yellow-400">★★★★★</div>
@@ -527,7 +562,7 @@
                 
                 <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
                     <div class="flex items-center mb-4">
-                        <img src="client4.jpg" alt="Client 4" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='S4'; this.src='';">
+                        <div class="client-avatar avatar-sw">SW</div>
                         <div>
                             <h4 class="font-semibold">Sarah Wilson</h4>
                             <div class="text-yellow-400">★★★★★</div>
@@ -538,7 +573,7 @@
                 
                 <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
                     <div class="flex items-center mb-4">
-                        <img src="client5.jpg" alt="Client 5" class="w-12 h-12 rounded-full mr-4 bg-purple-600 flex items-center justify-center text-white font-bold" onerror="this.innerHTML='D5'; this.src='';">
+                        <div class="client-avatar avatar-db">DB</div>
                         <div>
                             <h4 class="font-semibold">David Brown</h4>
                             <div class="text-yellow-400">★★★★★</div>
@@ -652,7 +687,7 @@
                     <a href="tel:+9779804918250" class="text-2xl hover:text-purple-400 transition-colors">
                         <i class="fas fa-phone"></i>
                     </a>
-                    <a href="mailto:sujansubedi803@gmail.com" class="text-2xl hover:text-purple-400 transition-colors">
+                    <a href="/cdn-cgi/l/email-protection#d5a6a0bfb4bba6a0b7b0b1bcede5e695b2b8b4bcb9fbb6bab8" class="text-2xl hover:text-purple-400 transition-colors">
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
@@ -685,7 +720,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Mobile menu toggle
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');

@@ -1,315 +1,378 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sujan Subedi - Portfolio</title>
+    <title>Sujan Subedi — Full-Stack Developer & Tech Innovator</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- FontAwesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Three.js CDN for 3D Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                            accent: '#06b6d4',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 15px rgba(139,92,246,0.6))' },
+                            '50%': { opacity: '0.8', filter: 'drop-shadow(0 0 25px rgba(6,182,212,0.8))' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Your existing styles remain unchanged */
-        .gradient-bg {
-            background: linear-gradient(135deg, #000000 0%, #4c1d95 50%, #7c3aed 100%);
-            position: relative;
-        }
-        
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        
-        .gradient-bg::after {
-            content: '{ } < /> function() { return code; } class Developer { } const skills = []; if (passionate) { create(); } while (learning) { grow(); } </>';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: rgba(124, 58, 237, 0.1);
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            line-height: 2;
-            padding: 20px;
-            pointer-events: none;
-            overflow: hidden;
-            animation: codeFlow 20s linear infinite;
-        }
-        
-        @keyframes codeFlow {
-            0% { transform: translateY(100%); }
-            100% { transform: translateY(-100%); }
+        body {
+            background-color: #07090e;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
 
-        
-        .floating-btn {
-            position: fixed;
-            z-index: 1000;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .floating-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .whatsapp-btn {
-            bottom: 20px;
-            right: 20px;
-            background: #25D366;
-        }
-        
-        .phone-btn {
-            bottom: 90px;
-            right: 20px;
-            background: #007bff;
-        }
-        
-        .skill-item {
-            transition: all 0.3s ease;
-        }
-        
-        .skill-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
-        }
-        
-        .project-card {
-            transition: all 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .nav-link {
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: #a855f7;
-            transform: translateY(-2px);
+        /* Glassmorphism components */
+        .glass-panel {
+            background: rgba(15, 20, 32, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(139, 92, 246, 0.18);
         }
 
-        /* Image preview styling */
+        .glass-card {
+            background: rgba(18, 24, 38, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(167, 139, 250, 0.4);
+            box-shadow: 0 15px 35px -10px rgba(124, 58, 237, 0.25);
+        }
+
+        /* 3D Tilt perspective wrapper */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            will-change: transform;
+        }
+
+        .tilt-content {
+            transform: translateZ(20px);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07090e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d1b4e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7c3aed;
+        }
+
+        /* Image preview container */
         .image-preview {
             width: 100%;
-            height: 150px;
-            border: 2px dashed #7c3aed;
+            height: 140px;
+            border: 2px dashed rgba(139, 92, 246, 0.4);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-bottom: 10px;
-            background-color: #1f2937;
+            background-color: rgba(0, 0, 0, 0.4);
         }
-        
+
         .image-preview img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        
-        .upload-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #7c3aed;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-align: center;
-            margin-top: 8px;
-        }
-        
-        .upload-btn:hover {
-            background-color: #6d28d9;
-        }
-        
+
         #image-upload, #edit-image-upload {
             display: none;
         }
-        
-        /* Edit modal styling */
-        .edit-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        
-        .edit-modal-content {
-            background-color: #1f2937;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid #7c3aed;
-        }
-        
-        /* Client avatar styling */
+
         .client-avatar {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-            color: white;
-            margin-right: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #ffffff;
             flex-shrink: 0;
-        }
-        
-        .avatar-js {
-            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
-        }
-        
-        .avatar-mg {
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-        }
-        
-        .avatar-rj {
-            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-        }
-        
-        .avatar-sw {
-            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
-        }
-        
-        .avatar-db {
-            background: linear-gradient(135deg, #0ea5e9 0%, #60a5fa 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
     </style>
 </head>
-<body class="bg-black text-white">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b border-purple-500/30">
-        <div class="container mx-auto px-6 py-4">
+<body class="font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- 3D Interactive Canvas Background for Hero -->
+    <div id="hero-3d-container" class="fixed inset-0 pointer-events-none z-0 opacity-60"></div>
+
+    <!-- Navigation Header -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg flex items-center justify-center font-bold text-xl">
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-500 to-brand-accent flex items-center justify-center font-extrabold text-white text-lg shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform duration-300">
                         SS
                     </div>
-                    <span class="text-xl font-bold">Sujan Subedi</span>
+                    <span class="text-xl font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors">
+                        Sujan <span class="text-brand-400">Subedi</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-sm text-gray-300">
+                    <a href="#home" class="hover:text-brand-400 transition-colors py-1">Home</a>
+                    <a href="#about" class="hover:text-brand-400 transition-colors py-1">About</a>
+                    <a href="#skills" class="hover:text-brand-400 transition-colors py-1">Skills</a>
+                    <a href="#projects" class="hover:text-brand-400 transition-colors py-1">Projects</a>
+                    <a href="#reviews" class="hover:text-brand-400 transition-colors py-1">Reviews</a>
+                    <a href="#contact" class="hover:text-brand-400 transition-colors py-1">Contact</a>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#skills" class="nav-link">Skills</a>
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <a href="#reviews" class="nav-link">Reviews</a>
-                    <a href="#contact" class="nav-link">Contact</a>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <button onclick="scrollToSection('contact')" class="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-accent transition-all duration-300 shadow-md shadow-brand-600/30 hover:shadow-brand-500/50 hover:scale-105">
+                        Let's Talk
+                    </button>
                 </div>
+
+                <!-- Mobile Menu Toggle -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white">
+                    <button id="mobile-menu-btn" aria-label="Toggle menu" class="text-gray-300 hover:text-white p-2">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 border-t border-purple-500/30">
-            <div class="px-6 py-4 space-y-4">
-                <a href="#home" class="block nav-link">Home</a>
-                <a href="#about" class="block nav-link">About</a>
-                <a href="#skills" class="block nav-link">Skills</a>
-                <a href="#projects" class="block nav-link">Projects</a>
-                <a href="#reviews" class="block nav-link">Reviews</a>
-                <a href="#contact" class="block nav-link">Contact</a>
-            </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-6 py-6 space-y-4 font-medium text-gray-200">
+            <a href="#home" class="block hover:text-brand-400 transition-colors">Home</a>
+            <a href="#about" class="block hover:text-brand-400 transition-colors">About</a>
+            <a href="#skills" class="block hover:text-brand-400 transition-colors">Skills</a>
+            <a href="#projects" class="block hover:text-brand-400 transition-colors">Projects</a>
+            <a href="#reviews" class="block hover:text-brand-400 transition-colors">Reviews</a>
+            <a href="#contact" class="block hover:text-brand-400 transition-colors">Contact</a>
         </div>
     </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center pt-20">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row items-center justify-between">
-                <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
-                    <h1 class="text-5xl lg:text-7xl font-bold mb-6">
-                        Hi, I'm <span class="text-purple-400">Sujan</span>
-                    </h1>
-                    <p class="text-xl lg:text-2xl mb-8 text-gray-300">
-                        Passionate, Selfless & Dynamic Person
-                    </p>
-                    <p class="text-lg mb-8 text-gray-400">
-                        Transforming ideas into digital reality with creativity and innovation
-                    </p>
-                    <button onclick="scrollToSection('contact')" class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 z-10">
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Info -->
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full glass-card text-brand-400 text-xs font-mono tracking-wide border border-brand-500/30">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>Available for Freelance & Full-Stack Projects</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                    Crafting <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-brand-500 to-brand-accent">Digital Realities</span> with Purpose.
+                </h1>
+
+                <p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Hi, I'm <strong class="text-white font-semibold">Sujan Subedi</strong> — a passionate full-stack developer, UI/UX designer, and tech problem solver dedicated to turning complex engineering challenges into sleek, human-centered digital solutions.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                    <button onclick="scrollToSection('projects')" class="px-8 py-3.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-accent transition-all duration-300 shadow-lg shadow-brand-600/30 hover:scale-105 flex items-center space-x-2">
+                        <span>Explore My Work</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                    
+                    <button onclick="scrollToSection('contact')" class="px-8 py-3.5 rounded-full text-sm font-semibold text-gray-300 glass-card hover:text-white hover:border-brand-400 transition-all duration-300 hover:scale-105">
                         Get In Touch
                     </button>
                 </div>
-                <div class="lg:w-1/2 flex justify-center">
-                    <div class="relative">
-                        <img src="sujan.jpg" alt="Sujan Subedi" class="w-64 h-64 rounded-lg object-cover border-4 border-purple-500 shadow-2xl" onerror="this.src=''; this.alt='Photo not available'; this.className='w-64 h-64 rounded-lg bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white text-6xl font-bold border-4 border-purple-500 shadow-2xl'; this.innerHTML='SS';">
+
+                <!-- Stats counter bar -->
+                <div class="grid grid-cols-3 gap-4 pt-10 border-t border-white/10 max-w-lg mx-auto lg:mx-0">
+                    <div>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-white">3+</p>
+                        <p class="text-xs text-gray-400 font-mono mt-1">Years Tech Exp.</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-white">25+</p>
+                        <p class="text-xs text-gray-400 font-mono mt-1">Projects Built</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-white">100%</p>
+                        <p class="text-xs text-gray-400 font-mono mt-1">Dedication</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Right Profile Card with 3D Tilt Effect -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="tilt-card relative w-72 h-72 sm:w-80 sm:h-80 xl:w-96 xl:h-96 rounded-3xl p-1 bg-gradient-to-b from-brand-500 via-brand-600 to-brand-accent/40 shadow-2xl shadow-brand-600/30">
+                    <div class="tilt-content relative w-full h-full rounded-[22px] overflow-hidden bg-gray-950 flex flex-col items-center justify-center">
+                        <img src="sujan.jpg" alt="Sujan Subedi" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <!-- Fallback Avatar if image is missing -->
+                        <div class="w-full h-full bg-gradient-to-br from-gray-900 via-brand-900 to-black hidden flex-col items-center justify-center p-6 text-center">
+                            <div class="w-24 h-24 rounded-2xl bg-brand-600/40 border border-brand-400/30 flex items-center justify-center text-4xl font-black text-white shadow-xl mb-4">
+                                SS
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Sujan Subedi</h3>
+                            <p class="text-xs text-brand-400 font-mono mt-1">Full-Stack Engineer</p>
+                        </div>
+                    </div>
+                    <!-- Floating Tech Badge overlay -->
+                    <div class="absolute -bottom-5 -left-5 glass-card px-4 py-2.5 rounded-2xl border border-brand-500/40 flex items-center space-x-3 shadow-xl">
+                        <i class="fas fa-code text-brand-400 text-lg"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">Clean Code</p>
+                            <p class="text-[10px] text-gray-400">Architecture & Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-900 relative">
-        <div class="absolute inset-0 opacity-5 pointer-events-none">
-            <div class="absolute top-10 left-10 text-purple-400 font-mono text-sm">const developer = { name: 'Sujan', skills: ['frontend', 'backend'] };</div>
-            <div class="absolute top-32 right-20 text-purple-400 font-mono text-sm">function createAmazingWebsites() { return innovation + passion; }</div>
-            <div class="absolute bottom-20 left-1/4 text-purple-400 font-mono text-sm">class WebDeveloper extends Passionate { constructor() { super(); } }</div>
-        </div>
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">About <span class="text-purple-400">Me</span></h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h3 class="text-2xl font-semibold mb-6 text-purple-300">Passionate, Selfless & Dynamic Developer</h3>
-                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
-                        I am Sujan Subedi, a passionate web developer with expertise in both frontend and backend development. 
-                        My journey in technology is driven by a selfless commitment to creating solutions that make a difference 
-                        and a dynamic approach to learning and adapting to new technologies.
-                    </p>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 relative z-10 bg-gray-950/80 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <p class="text-xs font-mono uppercase tracking-widest text-brand-400">Discover My Background</p>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Driven by Passion & Innovation</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-brand-accent mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-10 items-stretch">
+                <!-- Main Bio Text -->
+                <div class="lg:col-span-6 glass-panel p-8 rounded-3xl flex flex-col justify-between space-y-6">
+                    <div class="space-y-4 text-gray-300 leading-relaxed text-base">
+                        <h3 class="text-2xl font-bold text-white">Building Solutions That Matter</h3>
+                        <p>
+                            I am <strong class="text-white">Sujan Subedi</strong>, a dynamic and continuous-learning software enthusiast. My philosophy balances analytical technical precision with human-centric design thinking.
+                        </p>
+                        <p>
+                            Whether architecting robust scalable web APIs, crafting engaging front-end user experiences, or configuring hardware systems, I prioritize functional elegance and reliability in every line of code.
+                        </p>
+                    </div>
+
+                    <!-- Highlights Badge Grid -->
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 font-mono text-xs">
+                        <div class="flex items-center space-x-2 text-gray-300">
+                            <i class="fas fa-check-circle text-brand-400"></i>
+                            <span>Frontend Expertise</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-300">
+                            <i class="fas fa-check-circle text-brand-400"></i>
+                            <span>Backend Systems</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-300">
+                            <i class="fas fa-check-circle text-brand-400"></i>
+                            <span>UI/UX Architecture</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-300">
+                            <i class="fas fa-check-circle text-brand-400"></i>
+                            <span>Network & Hardware</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-black/50 p-6 rounded-lg border border-purple-500/30">
-                        <h4 class="text-xl font-semibold mb-4 text-purple-300">
-                            <i class="fas fa-code mr-2"></i>Development Expertise
-                        </h4>
-                        <ul class="space-y-2 text-gray-300">
-                            <li>• Frontend Developer (React, JavaScript)</li>
-                            <li>• Backend Developer (Node.js, Python, PHP)</li>
-                            <li>• Full-Stack Web Development</li>
-                            <li>• Database Design & Management (MySQL, DBMS)</li>
+
+                <!-- Two Card Breakdown -->
+                <div class="lg:col-span-6 grid sm:grid-cols-2 gap-6">
+                    <!-- Dev Box -->
+                    <div class="tilt-card glass-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-brand-400 text-xl">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Development</h4>
+                        <ul class="space-y-2 text-sm text-gray-300 font-mono">
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                                <span>React & JavaScript</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                                <span>Node.js & Python</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                                <span>PHP & WordPress</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                                <span>Databases (MySQL)</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="bg-black/50 p-6 rounded-lg border border-purple-500/30">
-                        <h4 class="text-xl font-semibold mb-4 text-purple-300">
-                            <i class="fas fa-palette mr-2"></i>Design & More
-                        </h4>
-                        <ul class="space-y-2 text-gray-300">
-                            <li>• Web Designer (UI/UX)</li>
-                            <li>• Graphic Designer</li>
-                            <li>• Computer Hardware & Networking</li>
-                            <li>• Business Solutions</li>
+
+                    <!-- Design & Systems Box -->
+                    <div class="tilt-card glass-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-xl">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Design & Systems</h4>
+                        <ul class="space-y-2 text-sm text-gray-300 font-mono">
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                                <span>UI/UX Prototyping</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                                <span>Graphic Design</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                                <span>Hardware & Networking</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                                <span>Tally Accounting</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -317,209 +380,188 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-black">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">My <span class="text-purple-400">Skills</span></h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Language Skills -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('languages')">
-                    <i class="fas fa-language text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Languages</h3>
-                    <p class="text-sm text-gray-400">English, Nepali, Hindi</p>
-                </div>
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <p class="text-xs font-mono uppercase tracking-widest text-brand-400">Technical Proficiency</p>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Skills & Technologies</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Click any skill stack below to explore documentation and industry standards.</p>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 
-                <!-- HTML Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('html')">
-                    <i class="fab fa-html5 text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">HTML</h3>
-                    <p class="text-sm text-gray-400">Markup Language</p>
+                <!-- Skill Item Template -->
+                <div onclick="openSkillLink('html')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-html5 text-4xl text-orange-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">HTML5</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Markup</p>
                 </div>
 
-                <!-- CSS Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('css')">
-                    <i class="fab fa-css3-alt text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">CSS</h3>
-                    <p class="text-sm text-gray-400">Styling Language</p>
+                <div onclick="openSkillLink('css')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-css3-alt text-4xl text-blue-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">CSS3</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Styling</p>
                 </div>
 
-                <!-- Tailwind CSS Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('tailwind')">
-                    <i class="fas fa-wind text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Tailwind CSS</h3>
-                    <p class="text-sm text-gray-400">Utility-First Framework</p>
+                <div onclick="openSkillLink('tailwind')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-wind text-4xl text-sky-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Tailwind CSS</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Framework</p>
                 </div>
 
-                <!-- Bootstrap Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('bootstrap')">
-                    <i class="fab fa-bootstrap text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Bootstrap</h3>
-                    <p class="text-sm text-gray-400">CSS Framework</p>
+                <div onclick="openSkillLink('javascript')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-js-square text-4xl text-yellow-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">JavaScript</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Expert</p>
                 </div>
 
-                <!-- AI Prompt Engineering Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('ai-prompt')">
-                    <i class="fas fa-robot text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">AI Prompt Engineering</h3>
-                    <p class="text-sm text-gray-400">Optimizing AI Interactions</p>
+                <div onclick="openSkillLink('react')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-react text-4xl text-cyan-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">React</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Frontend</p>
                 </div>
-                
-                <!-- Programming Languages -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('python')">
-                    <i class="fab fa-python text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Python</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('python')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-python text-4xl text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Python</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Advanced</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('javascript')">
-                    <i class="fab fa-js-square text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">JavaScript</h3>
-                    <p class="text-sm text-gray-400">Expert</p>
+
+                <div onclick="openSkillLink('nodejs')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-node-js text-4xl text-emerald-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Node.js</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Runtime</p>
                 </div>
-                
-                <!-- PHP Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('php')">
-                    <i class="fab fa-php text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">PHP</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('php')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-php text-4xl text-indigo-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">PHP</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Backend</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('react')">
-                    <i class="fab fa-react text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">React</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('django')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-cubes text-4xl text-emerald-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Django</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Web Framework</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('nodejs')">
-                    <i class="fab fa-node-js text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Node.js</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('flask')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-flask text-4xl text-purple-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Flask</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Microframework</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('cpp')">
-                    <i class="fas fa-code text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">C/C++</h3>
-                    <p class="text-sm text-gray-400">Intermediate</p>
+
+                <div onclick="openSkillLink('mysql')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-database text-4xl text-blue-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">MySQL / DBMS</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Database</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('dsa')">
-                    <i class="fas fa-project-diagram text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">DSA</h3>
-                    <p class="text-sm text-gray-400">Intermediate</p>
+
+                <div onclick="openSkillLink('ai-prompt')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-robot text-4xl text-pink-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">AI Prompt Eng.</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Optimization</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('flask')">
-                    <i class="fas fa-flask text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Flask</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('wordpress')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-wordpress text-4xl text-sky-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">WordPress</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">CMS</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('django')">
-                    <i class="fab fa-python text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Django</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('github')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fab fa-github text-4xl text-gray-200 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">GitHub</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Version Control</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('fastapi')">
-                    <i class="fas fa-rocket text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">FastAPI</h3>
-                    <p class="text-sm text-gray-400">Intermediate</p>
+
+                <div onclick="openSkillLink('design')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-paint-brush text-4xl text-pink-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Graphic Design</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Photoshop/Canva</p>
                 </div>
-                
-                <!-- DBMS Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('dbms')">
-                    <i class="fas fa-database text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">DBMS</h3>
-                    <p class="text-sm text-gray-400">Database Management</p>
+
+                <div onclick="openSkillLink('uiux')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-desktop text-4xl text-indigo-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">UI/UX Design</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Web Design</p>
                 </div>
-                
-                <!-- MySQL Skill -->
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('mysql')">
-                    <i class="fas fa-database text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">MySQL</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('hardware')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-microchip text-4xl text-rose-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Hardware</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">IT Systems</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('wordpress')">
-                    <i class="fab fa-wordpress text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">WordPress</h3>
-                    <p class="text-sm text-gray-400">Advanced</p>
+
+                <div onclick="openSkillLink('tally')" class="tilt-card glass-card p-5 rounded-2xl text-center cursor-pointer group">
+                    <i class="fas fa-calculator text-4xl text-emerald-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-white text-sm">Tally</h3>
+                    <p class="text-[11px] text-gray-400 font-mono mt-1">Accounting</p>
                 </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('github')">
-                    <i class="fab fa-github text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">GitHub</h3>
-                    <p class="text-sm text-gray-400">Expert</p>
-                </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('design')">
-                    <i class="fas fa-paint-brush text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Graphic Design</h3>
-                    <p class="text-sm text-gray-400">Photoshop/Canva</p>
-                </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('uiux')">
-                    <i class="fas fa-desktop text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">UI/UX Design</h3>
-                    <p class="text-sm text-gray-400">Web Designer</p>
-                </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('hardware')">
-                    <i class="fas fa-microchip text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Hardware</h3>
-                    <p class="text-sm text-gray-400">Computer & Networking</p>
-                </div>
-                
-                <div class="skill-item bg-gray-900 p-6 rounded-lg border border-purple-500/30 text-center cursor-pointer" onclick="openSkillLink('tally')">
-                    <i class="fas fa-calculator text-3xl text-purple-400 mb-4"></i>
-                    <h3 class="font-semibold mb-2">Tally</h3>
-                    <p class="text-sm text-gray-400">Accounting Software</p>
-                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between items-center mb-16">
-                <h2 class="text-4xl font-bold">My <span class="text-purple-400">Projects</span></h2>
-                <button onclick="showAdminLogin()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm">
-                    <i class="fas fa-cog mr-2"></i>Admin
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="py-24 relative z-10 bg-gray-950/80 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+                <div>
+                    <p class="text-xs font-mono uppercase tracking-widest text-brand-400">Featured Work</p>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-1">Projects & Products</h2>
+                </div>
+                <button onclick="showAdminLogin()" class="px-4 py-2 rounded-xl glass-card text-xs font-mono text-gray-300 hover:text-white hover:border-brand-400 flex items-center space-x-2 transition-all">
+                    <i class="fas fa-user-shield text-brand-400"></i>
+                    <span>Admin Panel</span>
                 </button>
             </div>
-            
+
+            <!-- Dynamic Project Grid -->
             <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Projects will be loaded here -->
+                <!-- Javascript will load project cards here -->
             </div>
-            
-            <!-- Admin Panel -->
-            <div id="admin-panel" class="hidden mt-12 bg-black/50 p-6 rounded-lg border border-purple-500/30">
-                <h3 class="text-xl font-semibold mb-4">Admin Panel</h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold mb-2">Add New Project</h4>
-                        <input type="text" id="new-project-name" placeholder="Project Name" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white">
-                        <textarea id="new-project-desc" placeholder="Project Description" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white h-20"></textarea>
+
+            <!-- Admin Panel Drawer (Hidden by default) -->
+            <div id="admin-panel" class="hidden mt-16 glass-panel p-8 rounded-3xl border border-brand-500/40">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                    <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                        <i class="fas fa-sliders-h text-brand-400"></i>
+                        <span>Admin Dashboard</span>
+                    </h3>
+                    <span class="text-xs font-mono bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full">Authenticated</span>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Form to add new project -->
+                    <div class="space-y-4">
+                        <h4 class="text-sm font-semibold text-gray-300">Create New Project</h4>
+                        <input type="text" id="new-project-name" placeholder="Project Title" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-brand-500 focus:outline-none">
+                        <textarea id="new-project-desc" placeholder="Brief Description" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm h-24 focus:border-brand-500 focus:outline-none"></textarea>
                         
-                        <!-- Image Upload Section -->
-                        <div class="mb-2">
-                            <label class="block text-sm font-semibold mb-2">Project Image</label>
+                        <div>
+                            <label class="block text-xs font-mono text-gray-400 mb-2">Project Media Image</label>
                             <div id="image-preview" class="image-preview">
-                                <span class="text-gray-400">Image preview</span>
+                                <span class="text-xs text-gray-500">Image Preview Placeholder</span>
                             </div>
-                            <input type="file" id="image-upload" accept="image/*" capture="camera">
-                            <label for="image-upload" class="upload-btn">
-                                <i class="fas fa-upload mr-2"></i>Upload Image
+                            <input type="file" id="image-upload" accept="image/*">
+                            <label for="image-upload" class="mt-2 inline-block px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold cursor-pointer transition-colors">
+                                <i class="fas fa-upload mr-2"></i>Select File
                             </label>
                         </div>
-                        
-                        <button onclick="addProject()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Add Project</button>
+
+                        <button onclick="addProject()" class="w-full py-3 bg-gradient-to-r from-brand-600 to-brand-accent hover:from-brand-500 hover:to-brand-accent text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-brand-600/30">
+                            Publish Project
+                        </button>
                     </div>
+
+                    <!-- Manage Existing Projects -->
                     <div>
-                        <h4 class="font-semibold mb-2">Manage Projects</h4>
-                        <div id="admin-projects-list" class="space-y-2">
-                            <!-- Admin project list will be here -->
+                        <h4 class="text-sm font-semibold text-gray-300 mb-4">Manage Active Projects</h4>
+                        <div id="admin-projects-list" class="space-y-3 max-h-[350px] overflow-y-auto pr-2">
+                            <!-- Populated dynamically -->
                         </div>
                     </div>
                 </div>
@@ -527,168 +569,133 @@
         </div>
     </section>
 
-    <!-- Edit Project Modal (hidden by default) -->
-    <div id="edit-modal" class="edit-modal hidden">
-        <div class="edit-modal-content">
-            <h3 class="text-xl font-semibold mb-4">Edit Project</h3>
-            <input type="hidden" id="edit-project-id">
+    <!-- REVIEWS & FAQs SECTION -->
+    <section id="reviews" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
             
-            <input type="text" id="edit-project-name" placeholder="Project Name" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white">
-            <textarea id="edit-project-desc" placeholder="Project Description" class="w-full p-2 mb-2 bg-gray-800 rounded border border-purple-500/30 text-white h-20"></textarea>
-            
-            <!-- Image Upload Section for Editing -->
-            <div class="mb-4">
-                <label class="block text-sm font-semibold mb-2">Project Image</label>
-                <div id="edit-image-preview" class="image-preview">
-                    <span class="text-gray-400">Image preview</span>
-                </div>
-                <input type="file" id="edit-image-upload" accept="image/*" capture="camera">
-                <label for="edit-image-upload" class="upload-btn">
-                    <i class="fas fa-upload mr-2"></i>Change Image
-                </label>
+            <!-- Client Reviews -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <p class="text-xs font-mono uppercase tracking-widest text-brand-400">Client Feedback</p>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white">What People Say</h2>
             </div>
-            
-            <div class="flex space-x-2">
-                <button onclick="updateProject()" class="bg-green-600 hover:green-700 px-4 py-2 rounded flex-1">Update Project</button>
-                <button onclick="closeEditModal()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded flex-1">Cancel</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Reviews Section -->
-    <section id="reviews" class="py-20 bg-black">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Client <span class="text-purple-400">Reviews</span></h2>
-            
-            <!-- Reviews -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
-                    <div class="flex items-center mb-4">
-                        <div class="client-avatar avatar-js">JS</div>
-                        <div>
-                            <h4 class="font-semibold">John Smith</h4>
-                            <div class="text-yellow-400">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-300">"Sujan delivered an exceptional website for our business. His attention to detail and technical expertise is outstanding!"</p>
-                </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
                 
-                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
-                    <div class="flex items-center mb-4">
-                        <div class="client-avatar avatar-mg">MG</div>
+                <div class="tilt-card glass-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
+                    <p class="text-gray-300 text-sm italic leading-relaxed">
+                        "Sujan delivered an exceptional website for our business. His technical dynamic skills and frontend detail are top tier!"
+                    </p>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-white/10">
+                        <div class="client-avatar bg-gradient-to-tr from-brand-600 to-brand-accent">JS</div>
                         <div>
-                            <h4 class="font-semibold">Maria Garcia</h4>
-                            <div class="text-yellow-400">★★★★★</div>
+                            <h4 class="text-white text-sm font-bold">John Smith</h4>
+                            <div class="text-amber-400 text-xs">★★★★★</div>
                         </div>
                     </div>
-                    <p class="text-gray-300">"Professional, reliable, and creative. Sujan transformed our ideas into a beautiful, functional website."</p>
                 </div>
-                
-                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
-                    <div class="flex items-center mb-4">
-                        <div class="client-avatar avatar-rj">RJ</div>
+
+                <div class="tilt-card glass-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
+                    <p class="text-gray-300 text-sm italic leading-relaxed">
+                        "Reliable, responsive, and clear communicator. Sujan brought our web app ideas to life faster than scheduled!"
+                    </p>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-white/10">
+                        <div class="client-avatar bg-gradient-to-tr from-emerald-600 to-teal-400">MG</div>
                         <div>
-                            <h4 class="font-semibold">Robert Johnson</h4>
-                            <div class="text-yellow-400">★★★★★</div>
+                            <h4 class="text-white text-sm font-bold">Maria Garcia</h4>
+                            <div class="text-amber-400 text-xs">★★★★★</div>
                         </div>
                     </div>
-                    <p class="text-gray-300">"Excellent communication and fast delivery. The e-commerce site Sujan built has increased our sales significantly."</p>
                 </div>
-                
-                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
-                    <div class="flex items-center mb-4">
-                        <div class="client-avatar avatar-sw">SW</div>
+
+                <div class="tilt-card glass-card p-6 rounded-3xl flex flex-col justify-between space-y-4">
+                    <p class="text-gray-300 text-sm italic leading-relaxed">
+                        "The e-commerce experience Sujan built boosted our online conversion significantly. Highly recommended!"
+                    </p>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-white/10">
+                        <div class="client-avatar bg-gradient-to-tr from-rose-600 to-orange-400">RJ</div>
                         <div>
-                            <h4 class="font-semibold">Sarah Wilson</h4>
-                            <div class="text-yellow-400">★★★★★</div>
+                            <h4 class="text-white text-sm font-bold">Robert Johnson</h4>
+                            <div class="text-amber-400 text-xs">★★★★★</div>
                         </div>
                     </div>
-                    <p class="text-gray-300">"Amazing work on our portfolio website. Sujan's design skills and technical knowledge are top-notch."</p>
                 </div>
-                
-                <div class="bg-gray-900 p-6 rounded-lg border border-purple-500/30">
-                    <div class="flex items-center mb-4">
-                        <div class="client-avatar avatar-db">DB</div>
-                        <div>
-                            <h4 class="font-semibold">David Brown</h4>
-                            <div class="text-yellow-400">★★★★★</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-300">"Sujan is a true professional. He delivered our project on time and exceeded our expectations in every way."</p>
-                </div>
+
             </div>
-            
-            <!-- FAQ Section -->
-            <div class="max-w-4xl mx-auto">
-                <h3 class="text-2xl font-bold text-center mb-8">Frequently Asked <span class="text-purple-400">Questions</span></h3>
+
+            <!-- FAQs Accordion -->
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-10 space-y-2">
+                    <p class="text-xs font-mono uppercase tracking-widest text-brand-400">Got Questions?</p>
+                    <h3 class="text-2xl sm:text-4xl font-bold text-white">Frequently Asked Questions</h3>
+                </div>
+
                 <div class="space-y-4">
-                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
-                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(1)">
-                            What services do you offer?
-                            <i class="fas fa-chevron-down" id="faq-icon-1"></i>
+                    <div class="glass-card rounded-2xl overflow-hidden">
+                        <button class="w-full p-5 text-left font-semibold text-white flex justify-between items-center text-sm sm:text-base" onclick="toggleFAQ(1)">
+                            <span>What engineering services do you offer?</span>
+                            <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300" id="faq-icon-1"></i>
                         </button>
-                        <div id="faq-content-1" class="hidden p-4 pt-0 text-gray-300">
-                            I offer full-stack web development, UI/UX design, graphic design, and computer hardware services. This includes custom websites, e-commerce platforms, and business solutions.
+                        <div id="faq-content-1" class="hidden px-5 pb-5 text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                            I specialize in full-stack web application development, frontend responsive styling, backend API architecture, graphic design, and IT infrastructure configuration.
                         </div>
                     </div>
-                    
-                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
-                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(2)">
-                            How long does a typical project take?
-                            <i class="fas fa-chevron-down" id="faq-icon-2"></i>
+
+                    <div class="glass-card rounded-2xl overflow-hidden">
+                        <button class="w-full p-5 text-left font-semibold text-white flex justify-between items-center text-sm sm:text-base" onclick="toggleFAQ(2)">
+                            <span>What is your typical turnaround timeline?</span>
+                            <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300" id="faq-icon-2"></i>
                         </button>
-                        <div id="faq-content-2" class="hidden p-4 pt-0 text-gray-300">
-                            Project timelines vary based on complexity. A simple website takes 1-2 weeks, while complex e-commerce or custom applications may take 4-8 weeks.
+                        <div id="faq-content-2" class="hidden px-5 pb-5 text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                            Project scope defines delivery dates. Standard informational portfolios take 1–2 weeks, while customized full-stack applications take 3–6 weeks.
                         </div>
                     </div>
-                    
-                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
-                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(3)">
-                            Do you provide ongoing support?
-                            <i class="fas fa-chevron-down" id="faq-icon-3"></i>
+
+                    <div class="glass-card rounded-2xl overflow-hidden">
+                        <button class="w-full p-5 text-left font-semibold text-white flex justify-between items-center text-sm sm:text-base" onclick="toggleFAQ(3)">
+                            <span>Do you provide maintenance and code updates?</span>
+                            <i class="fas fa-chevron-down text-brand-400 transition-transform duration-300" id="faq-icon-3"></i>
                         </button>
-                        <div id="faq-content-3" class="hidden p-4 pt-0 text-gray-300">
-                            Yes, I provide ongoing maintenance and support for all projects. This includes updates, bug fixes, and technical assistance as needed.
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-900 rounded-lg border border-purple-500/30">
-                        <button class="w-full p-4 text-left font-semibold flex justify-between items-center" onclick="toggleFAQ(4)">
-                            What are your payment terms?
-                            <i class="fas fa-chevron-down" id="faq-icon-4"></i>
-                        </button>
-                        <div id="faq-content-4" class="hidden p-4 pt-0 text-gray-300">
-                            I typically work with a 50% upfront payment and 50% upon completion. For larger projects, we can discuss milestone-based payments.
+                        <div id="faq-content-3" class="hidden px-5 pb-5 text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                            Yes! I offer long-term support, security patches, system updates, and custom feature enhancements post-launch.
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Get In <span class="text-purple-400">Touch</span></h2>
-            <div class="max-w-2xl mx-auto">
-                <form id="contact-form" class="space-y-6">
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 relative z-10 bg-gray-950/80 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <p class="text-xs font-mono uppercase tracking-widest text-brand-400">Initiate Contact</p>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Let's Build Something Great</h2>
+            </div>
+
+            <div class="max-w-xl mx-auto glass-panel p-8 rounded-3xl border border-brand-500/30">
+                <form id="contact-form" class="space-y-5">
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Full Name *</label>
-                        <input type="text" id="fullname" required class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none">
+                        <label class="block text-xs font-mono text-gray-300 mb-2">Full Name *</label>
+                        <input type="text" id="fullname" required placeholder="John Doe" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-brand-400 focus:outline-none">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Address *</label>
-                        <input type="text" id="address" required class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none">
+                        <label class="block text-xs font-mono text-gray-300 mb-2">Address / Location *</label>
+                        <input type="text" id="address" required placeholder="Kathmandu, Nepal" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-brand-400 focus:outline-none">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Phone Number *</label>
-                        <input type="tel" id="phone" required class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none">
+                        <label class="block text-xs font-mono text-gray-300 mb-2">Phone Number *</label>
+                        <input type="tel" id="phone" required placeholder="+977 9804918250" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-brand-400 focus:outline-none">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Inquiry *</label>
-                        <textarea id="inquiry" required rows="5" class="w-full p-3 bg-black border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:outline-none"></textarea>
+                        <label class="block text-xs font-mono text-gray-300 mb-2">Project Inquiry *</label>
+                        <textarea id="inquiry" required rows="4" placeholder="Tell me about your project requirements..." class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-brand-400 focus:outline-none"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 py-3 rounded-lg font-semibold transition-all duration-300">
+
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-accent hover:from-brand-500 hover:to-brand-accent text-white font-semibold text-sm shadow-lg shadow-brand-600/30 transition-all hover:scale-[1.01]">
                         Send Message
                     </button>
                 </form>
@@ -696,401 +703,356 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black py-12 border-t border-purple-500/30">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col items-center">
-                <div class="flex space-x-6 mb-8">
-                    <a href="https://www.facebook.com/subedi.sujan.2025" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="https://www.instagram.com/kalki_sujan123/?igsh=c2w0Y3ZhaGRmdHk4#" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/sujan-subedi-9b9260264/" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@sujansubedi989" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://wa.me/+9779804918250" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="https://github.com/Suj10S/" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fas fa-github"></i>
-                    </a>
-                    <a href="tel:+9779804918250" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fas fa-phone"></i>
-                    </a>
-                    <a href="/cdn-cgi/l/email-protection#d5a6a0bfb4bba6a0b7b0b1bcede5e695b2b8b4bcb9fbb6bab8" class="text-2xl hover:text-purple-400 transition-colors">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-                <p class="text-gray-400 text-center">
-                    © 2022 SUJAN SUBEDI All Right reserved. <br>
-                    Powered by SUJAN SUBEDI
-                </p>
+    <!-- FOOTER -->
+    <footer class="py-12 relative z-10 glass-panel border-t border-white/10 text-gray-400 text-xs">
+        <div class="max-w-7xl mx-auto px-6 text-center space-y-6">
+            
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-6 text-xl">
+                <a href="https://www.facebook.com/subedi.sujan.2025" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/kalki_sujan123/" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/sujan-subedi-9b9260264/" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.tiktok.com/@sujansubedi989" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/+9779804918250" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://github.com/Suj10S/" target="_blank" class="hover:text-brand-400 transition-colors"><i class="fab fa-github"></i></a>
+                <a href="tel:+9779804918250" class="hover:text-brand-400 transition-colors"><i class="fas fa-phone"></i></a>
             </div>
+
+            <p>© 2026 SUJAN SUBEDI. All Rights Reserved. Engineered with precision.</p>
         </div>
     </footer>
 
-    <!-- Floating Buttons -->
-    <a href="https://wa.me/+9779804918250" class="floating-btn whatsapp-btn">
-        <i class="fab fa-whatsapp text-white text-xl"></i>
-    </a>
-    
-    <a href="tel:+9779804918250" class="floating-btn phone-btn">
-        <i class="fas fa-phone text-white text-xl"></i>
-    </a>
+    <!-- FLOATING QUICK ACTION BUTTONS -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
+        <a href="tel:+9779804918250" aria-label="Call Sujan" class="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-lg shadow-blue-600/40 hover:scale-110 transition-transform">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/+9779804918250" target="_blank" aria-label="WhatsApp Sujan" class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center shadow-lg shadow-emerald-500/40 hover:scale-110 transition-transform">
+            <i class="fab fa-whatsapp text-lg"></i>
+        </a>
+    </div>
 
-    <!-- Admin Login Modal -->
-    <div id="admin-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-gray-900 p-8 rounded-lg border border-purple-500/30 max-w-md w-full mx-4">
-            <h3 class="text-xl font-semibold mb-4">Admin Login</h3>
-            <input type="password" id="admin-password" placeholder="Enter password" class="w-full p-3 mb-4 bg-black border border-purple-500/30 rounded text-white">
-            <div class="flex space-x-4">
-                <button onclick="adminLogin()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded flex-1">Login</button>
-                <button onclick="closeAdminModal()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded flex-1">Cancel</button>
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-modal" class="hidden fixed inset-0 z-50 glass-panel flex items-center justify-center p-4 bg-black/80">
+        <div class="glass-card p-8 rounded-3xl max-w-sm w-full space-y-4 border border-brand-500/40">
+            <h3 class="text-lg font-bold text-white">Admin Authentication</h3>
+            <p class="text-xs text-gray-400">Enter authorization key to manage projects.</p>
+            <input type="password" id="admin-password" placeholder="Password" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-brand-400 focus:outline-none">
+            <div class="flex space-x-3">
+                <button onclick="adminLogin()" class="flex-1 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl transition-all">Login</button>
+                <button onclick="closeAdminModal()" class="flex-1 py-2.5 glass-card text-gray-300 text-xs font-semibold rounded-xl hover:text-white">Cancel</button>
             </div>
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
+    <!-- EDIT PROJECT MODAL -->
+    <div id="edit-modal" class="hidden fixed inset-0 z-50 glass-panel flex items-center justify-center p-4 bg-black/80">
+        <div class="glass-card p-8 rounded-3xl max-w-md w-full space-y-4 border border-brand-500/40">
+            <h3 class="text-lg font-bold text-white">Edit Project Details</h3>
+            <input type="hidden" id="edit-project-id">
+            <input type="text" id="edit-project-name" placeholder="Title" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-brand-400 focus:outline-none">
+            <textarea id="edit-project-desc" placeholder="Description" class="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm h-20 focus:border-brand-400 focus:outline-none"></textarea>
+            
+            <div>
+                <div id="edit-image-preview" class="image-preview">
+                    <span class="text-xs text-gray-500">Image Preview Placeholder</span>
+                </div>
+                <input type="file" id="edit-image-upload" accept="image/*">
+                <label for="edit-image-upload" class="mt-2 inline-block px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold cursor-pointer">
+                    Change Media
+                </label>
+            </div>
 
-        // Smooth scrolling
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({
-                behavior: 'smooth'
+            <div class="flex space-x-3">
+                <button onclick="updateProject()" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl">Save</button>
+                <button onclick="closeEditModal()" class="flex-1 py-2.5 glass-card text-gray-300 text-xs font-semibold rounded-xl">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // THREE.JS 3D BACKGROUND ANIMATION
+        function init3DHeroBackground() {
+            const container = document.getElementById('hero-3d-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Particles Geometry
+            const geometry = new THREE.BufferGeometry();
+            const count = 700;
+            const positions = new Float32Array(count * 3);
+
+            for (let i = 0; i < count * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 15;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.035,
+                color: 0x8b5cf6,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            camera.position.z = 5;
+
+            // Interactive Mouse Follow
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.001;
+                particles.rotation.y += 0.0015;
+
+                particles.rotation.y += (mouseX - particles.rotation.y) * 0.05;
+                particles.rotation.x += (mouseY - particles.rotation.x) * 0.05;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
             });
         }
 
-        // Navigation links smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        // 3D CARDS PERSPECTIVE TILT
+        function init3DTiltEffect() {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -10;
+                    const rotateY = ((x - centerX) / centerX) * 10;
 
-        // Projects data
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            });
+        }
+
+        // DOM state & Management logic
         let projects = [
-            {
-                id: 1,
-                name: "Portfolio Website",
-                description: "A modern, responsive portfolio website showcasing skills and projects with beautiful animations.",
-                link: "#",
-                image: "portfolio.jpg"
-            },
-            {
-                id: 2,
-                name: "E-commerce Website",
-                description: "Full-featured online store with shopping cart, payment integration, and admin panel.",
-                link: "#",
-                image: "ecommerce.jpg"
-            },
-            {
-                id: 3,
-                name: "To-Do List App",
-                description: "Interactive task management application with drag-and-drop functionality and local storage.",
-                link: "#",
-                image: "todolist.jpg"
-            },
-            {
-                id: 4,
-                name: "Business Website",
-                description: "Professional business website with contact forms, service pages, and SEO optimization.",
-                link: "#",
-                image: "business.jpg"
-            }
+            { id: 1, name: "Portfolio Web Platform", description: "Modern, dynamic web platform built with rich 3D animations and responsive UI/UX.", link: "#", image: "" },
+            { id: 2, name: "E-Commerce Solution", description: "Full-featured online store architecture with dynamic carts and smooth payment flow.", link: "#", image: "" },
+            { id: 3, name: "Task Management Suite", description: "Interactive productivity desktop web app built for seamless task orchestration.", link: "#", image: "" }
         ];
 
-        // Variables to store uploaded images
         let uploadedImage = null;
         let editUploadedImage = null;
+        let isAdminLoggedIn = false;
 
-        // Image upload functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
         document.getElementById('image-upload').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     uploadedImage = event.target.result;
-                    document.getElementById('image-preview').innerHTML = `<img src="${uploadedImage}" alt="Preview">`;
+                    document.getElementById('image-preview').innerHTML = `<img src="${uploadedImage}">`;
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        // Edit image upload functionality
         document.getElementById('edit-image-upload').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     editUploadedImage = event.target.result;
-                    document.getElementById('edit-image-preview').innerHTML = `<img src="${editUploadedImage}" alt="Preview">`;
+                    document.getElementById('edit-image-preview').innerHTML = `<img src="${editUploadedImage}">`;
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        // Load projects
         function loadProjects() {
             const grid = document.getElementById('projects-grid');
             grid.innerHTML = '';
-            
+
             projects.forEach(project => {
-                const projectCard = document.createElement('div');
-                projectCard.className = 'project-card bg-black/50 rounded-lg border border-purple-500/30 cursor-pointer overflow-hidden';
-                projectCard.onclick = () => window.open(project.link, '_blank');
-                projectCard.innerHTML = `
-                    <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 relative overflow-hidden">
+                const card = document.createElement('div');
+                card.className = 'tilt-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between group cursor-pointer';
+                card.onclick = () => window.open(project.link, '_blank');
+                card.innerHTML = `
+                    <div class="h-48 bg-gradient-to-br from-brand-900 to-black relative overflow-hidden flex items-center justify-center">
                         ${project.imageData ? 
-                            `<img src="${project.imageData}" alt="${project.name}" class="w-full h-full object-cover">` : 
-                            `<img src="${project.image}" alt="${project.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                             <div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white text-4xl font-bold" style="display: none;">
-                                 <i class="fas fa-code"></i>
-                             </div>`
+                            `<img src="${project.imageData}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">` : 
+                            `<i class="fas fa-code text-4xl text-brand-400 opacity-60"></i>`
                         }
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-3">${project.name}</h3>
-                        <p class="text-gray-300 mb-4">${project.description}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-purple-400 font-semibold">View Project →</span>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">${project.name}</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">${project.description}</p>
+                        <div class="pt-2 text-xs font-mono text-brand-400 flex items-center space-x-1">
+                            <span>View Project Details</span>
+                            <i class="fas fa-chevron-right text-[10px]"></i>
                         </div>
                     </div>
                 `;
-                grid.appendChild(projectCard);
+                grid.appendChild(card);
             });
+
+            init3DTiltEffect();
         }
 
-        // Admin functionality
-        let isAdminLoggedIn = false;
-
-        function showAdminLogin() {
-            document.getElementById('admin-modal').classList.remove('hidden');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('admin-modal').classList.add('hidden');
-            document.getElementById('admin-password').value = '';
-        }
+        function showAdminLogin() { document.getElementById('admin-modal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
         function adminLogin() {
-            const password = document.getElementById('admin-password').value;
-            if (password === 'Sujan@123') {
+            const pwd = document.getElementById('admin-password').value;
+            if (pwd === 'Sujan@123') {
                 isAdminLoggedIn = true;
                 closeAdminModal();
                 document.getElementById('admin-panel').classList.remove('hidden');
                 loadAdminProjects();
-                alert('Admin login successful!');
             } else {
-                alert('Incorrect password!');
+                alert('Invalid Authentication Key');
             }
         }
 
         function loadAdminProjects() {
             const list = document.getElementById('admin-projects-list');
             list.innerHTML = '';
-            
-            projects.forEach(project => {
-                const item = document.createElement('div');
-                item.className = 'flex justify-between items-center bg-gray-800 p-2 rounded';
-                item.innerHTML = `
-                    <span>${project.name}</span>
-                    <div class="flex space-x-2">
-                        <button onclick="editProject(${project.id})" class="bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-sm">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button onclick="deleteProject(${project.id})" class="bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-sm">
-                            <i class="fas fa-trash"></i>
-                        </button>
+            projects.forEach(p => {
+                const row = document.createElement('div');
+                row.className = 'flex justify-between items-center glass-card p-3 rounded-xl text-xs';
+                row.innerHTML = `
+                    <span class="font-semibold text-white">${p.name}</span>
+                    <div class="space-x-2">
+                        <button onclick="editProject(${p.id})" class="text-sky-400 hover:text-sky-300 p-1"><i class="fas fa-edit"></i></button>
+                        <button onclick="deleteProject(${p.id})" class="text-rose-400 hover:text-rose-300 p-1"><i class="fas fa-trash"></i></button>
                     </div>
                 `;
-                list.appendChild(item);
+                list.appendChild(row);
             });
         }
 
         function addProject() {
-            if (!isAdminLoggedIn) return;
-            
             const name = document.getElementById('new-project-name').value;
             const desc = document.getElementById('new-project-desc').value;
-            
+
             if (name && desc) {
-                const newProject = {
+                projects.push({
                     id: Date.now(),
                     name: name,
                     description: desc,
                     link: "#",
-                    imageData: uploadedImage || null
-                };
-                projects.push(newProject);
+                    imageData: uploadedImage
+                });
                 loadProjects();
                 loadAdminProjects();
-                
-                // Reset form
                 document.getElementById('new-project-name').value = '';
                 document.getElementById('new-project-desc').value = '';
-                document.getElementById('image-preview').innerHTML = '<span class="text-gray-400">Image preview</span>';
+                document.getElementById('image-preview').innerHTML = '<span class="text-xs text-gray-500">Image Preview Placeholder</span>';
                 uploadedImage = null;
-                
-                alert('Project added successfully!');
-            } else {
-                alert('Please fill in all fields!');
             }
         }
 
         function editProject(id) {
-            if (!isAdminLoggedIn) return;
-            
-            const project = projects.find(p => p.id === id);
-            if (project) {
-                document.getElementById('edit-project-id').value = project.id;
-                document.getElementById('edit-project-name').value = project.name;
-                document.getElementById('edit-project-desc').value = project.description;
-                
-                // Show current image if available
-                if (project.imageData) {
-                    document.getElementById('edit-image-preview').innerHTML = `<img src="${project.imageData}" alt="Preview">`;
-                } else {
-                    document.getElementById('edit-image-preview').innerHTML = '<span class="text-gray-400">Image preview</span>';
-                }
-                
-                // Reset edit uploaded image
-                editUploadedImage = null;
-                
-                // Show modal
+            const p = projects.find(item => item.id === id);
+            if (p) {
+                document.getElementById('edit-project-id').value = p.id;
+                document.getElementById('edit-project-name').value = p.name;
+                document.getElementById('edit-project-desc').value = p.description;
                 document.getElementById('edit-modal').classList.remove('hidden');
             }
         }
 
         function updateProject() {
-            if (!isAdminLoggedIn) return;
-            
             const id = parseInt(document.getElementById('edit-project-id').value);
-            const name = document.getElementById('edit-project-name').value;
-            const desc = document.getElementById('edit-project-desc').value;
-            
-            if (name && desc) {
-                const projectIndex = projects.findIndex(p => p.id === id);
-                if (projectIndex !== -1) {
-                    projects[projectIndex].name = name;
-                    projects[projectIndex].description = desc;
-                    
-                    // Update image if a new one was uploaded
-                    if (editUploadedImage) {
-                        projects[projectIndex].imageData = editUploadedImage;
-                    }
-                    
-                    loadProjects();
-                    loadAdminProjects();
-                    closeEditModal();
-                    alert('Project updated successfully!');
-                }
-            } else {
-                alert('Please fill in all fields!');
+            const p = projects.find(item => item.id === id);
+            if (p) {
+                p.name = document.getElementById('edit-project-name').value;
+                p.description = document.getElementById('edit-project-desc').value;
+                if (editUploadedImage) p.imageData = editUploadedImage;
+                loadProjects();
+                loadAdminProjects();
+                closeEditModal();
             }
         }
 
-        function closeEditModal() {
-            document.getElementById('edit-modal').classList.add('hidden');
-        }
+        function closeEditModal() { document.getElementById('edit-modal').classList.add('hidden'); }
 
         function deleteProject(id) {
-            if (!isAdminLoggedIn) return;
-            
-            projects = projects.filter(project => project.id !== id);
+            projects = projects.filter(p => p.id !== id);
             loadProjects();
             loadAdminProjects();
-            alert('Project deleted successfully!');
         }
 
-        // Skill links
         function openSkillLink(skill) {
             const links = {
                 'html': 'https://developer.mozilla.org/en-US/docs/Web/HTML',
                 'css': 'https://developer.mozilla.org/en-US/docs/Web/CSS',
                 'tailwind': 'https://tailwindcss.com/docs',
-                'bootstrap': 'https://getbootstrap.com/docs/5.3/getting-started/introduction/',
-                'ai-prompt': 'https://www.promptingguide.ai/',
-                'languages': 'https://en.wikipedia.org/wiki/Multilingualism',
-                'python': 'https://python.org',
                 'javascript': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
-                'php': 'https://www.php.net',
-                'react': 'https://reactjs.org',
+                'react': 'https://react.dev',
+                'python': 'https://python.org',
                 'nodejs': 'https://nodejs.org',
-                'cpp': 'https://cplusplus.com',
-                'dsa': 'https://en.wikipedia.org/wiki/Data_structure',
-                'flask': 'https://flask.palletsprojects.com',
+                'php': 'https://php.net',
                 'django': 'https://djangoproject.com',
-                'fastapi': 'https://fastapi.tiangolo.com',
-                'dbms': 'https://en.wikipedia.org/wiki/Database',
-                'mysql': 'https://www.mysql.com',
+                'flask': 'https://flask.palletsprojects.com',
+                'mysql': 'https://mysql.com',
+                'ai-prompt': 'https://promptingguide.ai',
                 'wordpress': 'https://wordpress.org',
-                'github': 'https://github.com',
-                'design': 'https://adobe.com/products/photoshop.html',
-                'uiux': 'https://en.wikipedia.org/wiki/User_interface_design',
-                'hardware': 'https://en.wikipedia.org/wiki/Computer_hardware',
-                'tally': 'https://tallysolutions.com'
+                'github': 'https://github.com'
             };
-            
-            if (links[skill]) {
-                window.open(links[skill], '_blank');
-            }
+            if (links[skill]) window.open(links[skill], '_blank');
         }
 
-        // FAQ functionality
         function toggleFAQ(id) {
             const content = document.getElementById(`faq-content-${id}`);
             const icon = document.getElementById(`faq-icon-${id}`);
-            
             content.classList.toggle('hidden');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
+            icon.classList.toggle('rotate-180');
         }
 
-        // Contact form
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const fullname = document.getElementById('fullname').value;
-            const address = document.getElementById('address').value;
-            const phone = document.getElementById('phone').value;
-            const inquiry = document.getElementById('inquiry').value;
-            
-            // This is a demo form - in a real application, you would send this data to a server
-            alert(`Thank you ${fullname}! Your message has been received. We'll get back to you soon.`);
-            
-            // Reset form
+            const name = document.getElementById('fullname').value;
+            alert(`Thank you ${name}! Your inquiry has been dispatched successfully.`);
             this.reset();
         });
 
-        // Initialize
-        loadProjects();
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('bg-black');
-                nav.classList.remove('bg-black/90');
-            } else {
-                nav.classList.add('bg-black/90');
-                nav.classList.remove('bg-black');
-            }
+        // Initialize scene on load
+        window.addEventListener('DOMContentLoaded', () => {
+            init3DHeroBackground();
+            init3DTiltEffect();
+            loadProjects();
         });
     </script>
 </body>
